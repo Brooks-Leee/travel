@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a5f8f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="行程卡">
 <title>赤壁→广州→惠州 3天2晚亲子游 · 计划书（PC版）</title>
 <style>
   :root{
@@ -139,6 +144,49 @@
     .pane-rain::before{content:"🌧️ 雨天方案 · 室内线（备用）";display:block;font-size:15px;font-weight:800;color:var(--sea-d);margin-bottom:12px}
     footer{margin-top:16px}
   }
+
+  /* ===== 手机端排版 ===== */
+  html{scroll-behavior:smooth}
+  @media (max-width: 760px){
+    *{-webkit-tap-highlight-color:transparent}
+    body{font-size:15px}
+    .wrap{padding:0 14px 80px}
+    header .hwrap{padding:24px 14px 18px}
+    header h1{font-size:22px;letter-spacing:1px}
+    header .sub{font-size:13.5px}
+    .htag{font-size:11.5px;letter-spacing:2px}
+    .htrain{grid-template-columns:1fr;gap:10px}
+    .htcard .big{font-size:19px}
+    .overview{grid-template-columns:repeat(2,1fr);gap:8px;margin:18px 0}
+    .ovd{padding:11px 12px}
+    .ovd .t{font-size:13.5px}
+    .main{grid-template-columns:1fr;gap:14px}
+    .side{position:static}
+    .card{margin-bottom:14px;border-radius:12px}
+    .card-h{padding:12px 14px;font-size:16px;flex-wrap:wrap}
+    .card-b{padding:13px 14px}
+    .tl{padding-left:22px}
+    .tl .item{padding-bottom:14px}
+    .tl .item::before{left:-20px;width:10px;height:10px}
+    .tl .tx{font-size:15px}
+    .tl .nt{font-size:13px}
+    .tabbar{position:sticky;top:8px;z-index:5;background:var(--card);padding:6px;border-radius:12px;box-shadow:0 2px 8px rgba(15,60,90,.08)}
+    .tabbar label{padding:12px 6px;font-size:13.5px;border-radius:8px}
+    .ticket .t1{font-size:20px}
+    table{font-size:12px}
+    th,td{padding:6px 5px}
+    .spot{font-size:13px}
+    .warn{font-size:13px}
+    footer{font-size:11.5px;margin-top:20px}
+  }
+
+  /* ===== 手机底部快捷导航 ===== */
+  .mnav{display:none}
+  @media (max-width: 760px){
+    .mnav{display:flex;position:sticky;bottom:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:6px 8px calc(6px + env(safe-area-inset-bottom));gap:6px}
+    .mnav a{flex:1;text-align:center;text-decoration:none;font-size:12.5px;font-weight:700;color:var(--sea-d);background:var(--sea-l);border-radius:9px;padding:9px 2px}
+    .mnav a:active{background:var(--sea);color:#fff}
+  }
 </style>
 </head>
 <body>
@@ -181,7 +229,7 @@
 <div class="wrap">
 
   <!-- 总览 -->
-  <div class="overview">
+  <div class="overview" id="ov">
     <div class="ovd"><div class="d">8/20 周四夜</div><div class="t">家人 K237 上车</div><div class="s">卧铺过夜</div><span class="stay">你在广州北住一晚</span></div>
     <div class="ovd"><div class="d">8/21 周五</div><div class="t">长隆玩满7.5h</div><div class="s">09:20接站→11:00进园</div><span class="stay">住广州天河</span></div>
     <div class="ovd"><div class="d">8/22 周六</div><div class="t">早茶+市区+夜游</div><div class="s">泮溪早茶→陈家祠→晴☀️/雨🌧️双线</div><span class="stay">住广州天河</span></div>
@@ -195,7 +243,7 @@
     <!-- 左列：行程 -->
     <div class="col-main">
 
-      <div class="card">
+      <div class="card" id="d1">
         <div class="card-h"><span class="bar"></span><span class="ico">🐼</span>D1 · 8/21（周五）广州 · 长隆一整天</div>
         <div class="card-b">
           <div class="tl">
@@ -211,7 +259,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" id="d2">
         <div class="card-h"><span class="bar"></span><span class="ico">🥟</span>D2 · 8/22（周六）广州 · 文化日<span style="margin-left:auto;font-size:11.5px;font-weight:700;color:var(--sun);background:#fdeccd;border-radius:999px;padding:2px 12px">☀️/🌧️ 双方案</span></div>
         <div class="card-b">
           <div class="callout" style="margin:0 0 14px">出发前一晚看 8/22 天气预报切换方案：<b>晴天走珠江新城线，雨天走室内线</b>；上午老城段两案通用。</div>
@@ -254,7 +302,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" id="d3">
         <div class="card-h"><span class="bar"></span><span class="ico">🏖️</span>D3 · 8/23（周日）惠州 · 巽寮湾玩海 + 返程</div>
         <div class="card-b">
           <div class="tl">
@@ -270,7 +318,7 @@
     </div>
 
     <!-- 右列：信息栏 -->
-    <aside class="side">
+    <aside class="side" id="info">
 
       <div class="card">
         <div class="card-h"><span class="ico">🎫</span>车票详情</div>
@@ -380,5 +428,13 @@
 
   <footer>🚄 祝旅途愉快！计划生成于 2026-08-06 · 车次/票价以 12306 实际为准</footer>
 </div>
+
+<nav class="mnav">
+  <a href="#ov">📋 总览</a>
+  <a href="#d1">🐼 D1</a>
+  <a href="#d2">🥟 D2</a>
+  <a href="#d3">🏖️ D3</a>
+  <a href="#info">⚠️ 信息</a>
+</nav>
 </body>
 </html>
