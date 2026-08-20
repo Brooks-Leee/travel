@@ -1,22 +1,35 @@
-# 行程卡网页版部署说明（GitHub Pages）
+# 旅行档案网页版（GitHub Pages）
 
-> ✅ 已部署上线：**https://brooks-leee.github.io/travel/**
+> ✅ 已上线：
+> - 档案首页（目录）：**https://brooks-leee.github.io/travel/**
+> - 广州行程：**https://brooks-leee.github.io/travel/guangzhou.html**
 > 仓库：https://github.com/Brooks-Leee/travel
-> 每次推送到 `main` 分支，GitHub Actions 会自动重新部署，1-2 分钟生效。
+> 每次推送到 `main` 分支，GitHub Actions 自动重新部署，1-2 分钟生效。
+
+## 目录结构（每个行程一个文件）
+
+```
+travel/
+├── index.html        ← 档案首页（行程卡片列表，总入口）
+├── guangzhou.html    ← 广州惠州行（示例行程）
+├── beijing.html      ← 以后新增的行程，照此格式
+└── ...
+```
+
+## 新增一条行程记录怎么弄
+
+1. 把新行程的内容（日期/交通/每天安排/预算）发给 AI 助手
+2. AI 按同款样式生成 `xxx.html`（手机自适应排版现成），并在 `index.html` 里加一张入口卡片
+3. 推送后约 1-2 分钟生效，档案首页自动出现新行程；家人不用改任何东西，刷新即见
 
 ## 手机端使用
 
-- **发微信**：把上面的链接发给家人，点开即看（本机实测 github.io 可直连）
-- **iPhone 桌面图标**：Safari 打开 → 底部「分享」→「添加到主屏幕」→ 命名"行程卡"，之后点图标全屏打开，像 App 一样
-- **离线版**：电脑上的 `赤壁-广州惠州-3天2晚行程卡-手机版.pdf`（10页，晴雨两套全含），微信文件传输助手发手机即可
+- **档案首页**：Safari 打开 → 分享 → 添加到主屏幕，图标命名"旅行档案"，以后所有行程都从这里进
+- **单个行程**：也可以单独收藏/添加到主屏幕
+- **离线版**：各行程另有 PDF 版（如 `赤壁-广州惠州-3天2晚行程卡-手机版.pdf`），微信文件传输助手发手机即可
 
-## 更新流程
+## 备忘
 
-1. 在电脑上改主文件 `赤壁-广州惠州-3天2晚行程卡-PC版.html`
-2. 让 AI 助手重新导出手机版 PDF，并把最新内容同步成本文件夹的 `index.html`，然后帮你推送到 GitHub（本机 SSH 已配好，不需要令牌）
-3. 推送后约 1-2 分钟，手机刷新链接就是新版；链接不变、桌面图标不用重加
-
-## 备忘（历史方案）
-
-- Gitee Pages 已于 2026 年前后停服；仓库 `gitee.com/lee_oops/travel` 已不再使用，可删除
-- 腾讯云托管 / EdgeOne Pages 为备选方案，拖拽包见 `网页版部署包.zip`
+- 本文件夹（`网页部署源`）是部署源：`index.html`=档案首页，`guangzhou.html`=广州行程
+- 主编辑文件仍是 `赤壁-广州惠州-3天2晚行程卡-PC版.html`，改完让 AI 同步到 `guangzhou.html` 并推送
+- Gitee 仓库 `lee_oops/travel` 已弃用，可删除

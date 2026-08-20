@@ -7,434 +7,57 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="行程卡">
-<title>赤壁→广州→惠州 3天2晚亲子游 · 计划书（PC版）</title>
+<meta name="apple-mobile-web-app-title" content="旅行档案">
+<title>旅行档案 · 我们家的行程卡</title>
 <style>
-  :root{
-    --sea:#0e7cb8; --sea-d:#0a5f8f; --sea-l:#e3f2fb; --sand:#fff7ea; --sun:#f5a623;
-    --ink:#1f2937; --sub:#6b7280; --line:#e5e7eb; --card:#ffffff; --bg:#f2f6fa;
-    --red:#e34a4a; --green:#1a9c63;
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-size:14.5px}
-  .wrap{max-width:1180px;margin:0 auto;padding:0 28px 60px}
-
-  /* ===== 头部 ===== */
-  header{background:linear-gradient(135deg,#07496e 0%,#0a5f8f 40%,#1b92cf 100%);color:#fff}
-  .hwrap{max-width:1180px;margin:0 auto;padding:38px 28px 30px}
-  .htop{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
-  .htag{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:4px 16px;font-size:12.5px;letter-spacing:3px}
-  .hdate{font-size:13px;opacity:.9}
-  header h1{font-size:30px;font-weight:800;letter-spacing:2px;margin:16px 0 6px}
-  header .sub{font-size:14.5px;opacity:.92}
-  .htrain{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
-  .htcard{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);border-radius:12px;padding:13px 18px;display:flex;align-items:center;gap:16px}
-  .htcard .emoji{font-size:26px}
-  .htcard .lbl{font-size:12px;opacity:.85}
-  .htcard .rt{display:flex;align-items:center;gap:14px;margin-top:2px}
-  .htcard .big{font-size:21px;font-weight:800}
-  .htcard .nm{font-size:15px;font-weight:700;background:rgba(255,255,255,.2);border-radius:6px;padding:1px 10px}
-  .htcard .mid{text-align:center;color:#cfe9f7;font-size:12px}
-
-  /* ===== 总览 ===== */
-  .overview{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:26px 0 26px}
-  .ovd{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:0 1px 4px rgba(15,60,90,.05)}
-  .ovd .d{font-size:12.5px;color:var(--sea-d);font-weight:700}
-  .ovd .t{font-size:14px;font-weight:600;margin:2px 0}
-  .ovd .s{font-size:12px;color:var(--sub)}
-  .ovd .stay{display:inline-block;margin-top:6px;font-size:11.5px;background:var(--sea-l);color:var(--sea-d);border-radius:5px;padding:1px 8px}
-
-  /* ===== 主体两列 ===== */
-  .main{display:grid;grid-template-columns:1fr 380px;gap:24px;align-items:start}
-  @media (max-width:940px){.main{grid-template-columns:1fr}.side{position:static!important}.overview{grid-template-columns:repeat(2,1fr)}}
-
-  .card{background:var(--card);border-radius:14px;box-shadow:0 2px 8px rgba(15,60,90,.05);margin-bottom:22px;overflow:hidden}
-  .card-h{display:flex;align-items:center;gap:10px;padding:15px 22px;font-size:17px;font-weight:800;border-bottom:1px solid var(--line);background:linear-gradient(90deg,#fbfdfe,#fff)}
-  .card-h .ico{font-size:20px}
-  .card-h .bar{width:4px;height:18px;background:var(--sea);border-radius:2px}
-  .card-b{padding:18px 22px}
-
-  /* ===== 时间轴 ===== */
-  .tl{position:relative;padding-left:26px}
-  .tl::before{content:"";position:absolute;left:8px;top:8px;bottom:8px;width:2px;background:var(--sea-l)}
-  .tl .item{position:relative;padding-bottom:18px}
-  .tl .item:last-child{padding-bottom:0}
-  .tl .item::before{content:"";position:absolute;left:-24px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--sea);border:2.5px solid #fff;box-shadow:0 0 0 2.5px var(--sea-l)}
-  .tl .item.hot::before{background:var(--sun);box-shadow:0 0 0 2.5px #fdeccd}
-  .tl .tm{font-size:13px;font-weight:800;color:var(--sea-d);display:inline-block;background:var(--sea-l);border-radius:6px;padding:0 9px}
-  .tl .tx{font-size:15px;font-weight:600;margin-top:4px}
-  .tl .nt{font-size:12.5px;color:var(--sub);margin-top:3px}
-  .tl .nt b{color:var(--sea-d)}
-  .day-chip{display:inline-block;font-size:12px;font-weight:800;color:#fff;background:var(--sea);border-radius:6px;padding:2px 10px;margin-right:10px;vertical-align:2px}
-
-  /* ===== 车票 ===== */
-  .ticket{border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:14px}
-  .ticket:last-child{margin-bottom:0}
-  .ttop{display:flex;justify-content:space-between;align-items:center;background:var(--sea-l);padding:7px 14px;font-size:12px;color:var(--sea-d);font-weight:700}
-  .open{background:var(--red);color:#fff;border-radius:999px;padding:2px 11px;font-size:11px}
-  .open.green{background:var(--green)}
-  .tbody{display:flex;align-items:center;justify-content:space-between;padding:13px 14px}
-  .sta{text-align:center}
-  .sta .t1{font-size:23px;font-weight:800}
-  .sta .t2{font-size:11.5px;color:var(--sub)}
-  .mid{flex:1;text-align:center;position:relative;margin:0 12px}
-  .mid .no{font-size:14px;font-weight:800;color:var(--sea-d)}
-  .mid .line{height:2px;background:repeating-linear-gradient(90deg,var(--sea) 0 6px,transparent 6px 12px);margin:5px 0}
-  .mid .via{font-size:11px;color:var(--sub)}
-  .tbot{display:flex;justify-content:space-between;padding:8px 14px;background:#fafbfc;border-top:1px dashed var(--line);font-size:12px;color:var(--sub)}
-  .tbot b{color:var(--red);font-size:14px}
-  .callout{background:var(--sand);border-left:4px solid var(--sun);border-radius:8px;padding:10px 13px;font-size:12.5px;color:#7a5b1e;margin-top:8px}
-
-  /* ===== 表格 ===== */
-  table{width:100%;border-collapse:collapse;font-size:13px}
-  th,td{padding:7px 9px;text-align:left;border-bottom:1px solid var(--line)}
-  th{color:var(--sub);font-weight:600;font-size:12px;background:#fafbfc}
-  tr:last-child td{border-bottom:none}
-  td b{color:var(--sea-d)}
-  .total td{font-weight:800;border-top:2px solid var(--sea);background:var(--sea-l);color:var(--sea-d);font-size:14px}
-
-  /* ===== 清单 ===== */
-  .grp{font-size:12.5px;font-weight:800;color:var(--sea-d);margin:12px 0 3px}
-  .grp:first-child{margin-top:0}
-  .chk{display:flex;gap:9px;align-items:flex-start;padding:4px 0;font-size:13px}
-  .chk .b{width:15px;height:15px;border:2px solid #b9c6d1;border-radius:4px;flex-shrink:0;margin-top:4px}
-
-  /* ===== 注意事项 ===== */
-  .warn{display:flex;gap:10px;padding:8px 0;font-size:13px;border-bottom:1px dashed var(--line)}
-  .warn:last-child{border-bottom:none}
-  .warn .d{font-size:15px;flex-shrink:0}
-  .warn b{color:var(--sea-d)}
-  .warn.red b{color:var(--red)}
-
-  /* ===== D2 晴雨双方案切换 ===== */
-  .tabbox input{display:none}
-  .tabbar{display:flex;gap:8px;margin-bottom:16px}
-  .tabbar label{flex:1;text-align:center;font-size:13px;font-weight:800;color:var(--sea-d);background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:9px 4px;cursor:pointer;user-select:none;transition:all .15s}
-  .tabbar label:hover{border-color:var(--sea)}
-  #d2-sun:checked ~ .tabbar label[for="d2-sun"],
-  #d2-rain:checked ~ .tabbar label[for="d2-rain"]{background:var(--sea);color:#fff;border-color:var(--sea)}
-  .pane{display:none}
-  #d2-sun:checked ~ .pane-sun{display:block}
-  #d2-rain:checked ~ .pane-rain{display:block}
-
-  /* ===== 备选景点 ===== */
-  .spot{display:flex;gap:10px;padding:7px 0;font-size:12.5px;border-bottom:1px dashed var(--line)}
-  .spot:last-child{border-bottom:none}
-  .spot .d{font-size:15px;flex-shrink:0}
-  .spot b{color:var(--sea-d)}
-  .spot .s{display:block;color:var(--sub);font-size:11.5px;margin-top:1px}
-
-  footer{text-align:center;color:var(--sub);font-size:12px;margin-top:30px}
-  .side{position:sticky;top:24px}
-
-  /* ===== 打印 / 导出 PDF（手机离线版） ===== */
-  @media print{
-    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-    body{background:#fff;font-size:12px}
-    header{background:linear-gradient(135deg,#07496e,#0a5f8f,#1b92cf)!important}
-    .hwrap{padding:22px 0 18px}
-    .wrap{padding:0;max-width:none}
-    .main{grid-template-columns:1fr}
-    .side{position:static}
-    .card{box-shadow:none;border:1px solid var(--line);page-break-inside:avoid}
-    .tabbar{display:none}
-    .pane{display:block!important}
-    .pane-sun::before{content:"☀️ 晴天方案 · 珠江新城线";display:block;font-size:15px;font-weight:800;color:var(--sea-d);margin:6px 0 12px}
-    .pane-rain{margin-top:30px;border-top:3px solid var(--sea-l);padding-top:14px}
-    .pane-rain::before{content:"🌧️ 雨天方案 · 室内线（备用）";display:block;font-size:15px;font-weight:800;color:var(--sea-d);margin-bottom:12px}
-    footer{margin-top:16px}
-  }
-
-  /* ===== 手机端排版 ===== */
-  html{scroll-behavior:smooth}
-  @media (max-width: 760px){
-    *{-webkit-tap-highlight-color:transparent}
-    body{font-size:15px}
-    .wrap{padding:0 14px 80px}
-    header .hwrap{padding:24px 14px 18px}
-    header h1{font-size:22px;letter-spacing:1px}
-    header .sub{font-size:13.5px}
-    .htag{font-size:11.5px;letter-spacing:2px}
-    .htrain{grid-template-columns:1fr;gap:10px}
-    .htcard .big{font-size:19px}
-    .overview{grid-template-columns:repeat(2,1fr);gap:8px;margin:18px 0}
-    .ovd{padding:11px 12px}
-    .ovd .t{font-size:13.5px}
-    .main{grid-template-columns:1fr;gap:14px}
-    .side{position:static}
-    .card{margin-bottom:14px;border-radius:12px;overflow:visible}
-    .card-h{padding:12px 14px;font-size:16px;flex-wrap:wrap;border-radius:12px 12px 0 0}
-    .card-b{padding:13px 14px}
-    .tl{padding-left:22px}
-    .tl .item{padding-bottom:14px}
-    .tl .item::before{left:-20px;width:10px;height:10px}
-    .tl .tx{font-size:15px}
-    .tl .nt{font-size:13px}
-    .tabbar{position:sticky;top:8px;z-index:5;background:var(--card);padding:6px;border-radius:12px;box-shadow:0 2px 8px rgba(15,60,90,.08)}
-    .tabbar label{padding:12px 6px;font-size:13.5px;border-radius:8px}
-    .ticket .t1{font-size:20px}
-    table{font-size:12px}
-    th,td{padding:6px 5px}
-    .spot{font-size:13px}
-    .warn{font-size:13px}
-    footer{font-size:11.5px;margin-top:20px}
-  }
-
-  /* ===== 手机底部快捷导航 ===== */
-  .mnav{display:none}
-  @media (max-width: 760px){
-    .mnav{display:flex;position:sticky;bottom:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:6px 8px calc(6px + env(safe-area-inset-bottom));gap:6px}
-    .mnav a{flex:1;text-align:center;text-decoration:none;font-size:12.5px;font-weight:700;color:var(--sea-d);background:var(--sea-l);border-radius:9px;padding:9px 2px}
-    .mnav a:active{background:var(--sea);color:#fff}
+  :root{--sea:#0e7cb8;--sea-d:#0a5f8f;--sea-l:#e3f2fb;--sand:#fff7ea;--sun:#f5a623;--ink:#1f2937;--sub:#6b7280;--line:#e5e7eb;--card:#fff;--bg:#f2f6fa}
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;font-size:15px}
+  header{background:linear-gradient(135deg,#07496e,#0a5f8f 40%,#1b92cf);color:#fff}
+  .hwrap{max-width:920px;margin:0 auto;padding:34px 20px 26px}
+  .hwrap h1{font-size:26px;font-weight:800;letter-spacing:1px}
+  .hwrap .sub{font-size:14px;opacity:.92;margin-top:6px}
+  .wrap{max-width:920px;margin:0 auto;padding:20px 16px 60px}
+  .trip{display:flex;gap:14px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:0 2px 8px rgba(15,60,90,.05);text-decoration:none;color:inherit}
+  .trip .emoji{font-size:34px;flex-shrink:0}
+  .trip .info{flex:1;min-width:0}
+  .trip .t{font-size:17px;font-weight:800;color:var(--sea-d)}
+  .trip .d{font-size:12.5px;color:var(--sub);margin:2px 0 4px}
+  .trip .r{font-size:13px;color:var(--sub)}
+  .trip .go{flex-shrink:0;background:var(--sea);color:#fff;border-radius:999px;padding:6px 14px;font-size:13px;font-weight:700}
+  .tip{background:var(--sand);border-left:4px solid var(--sun);border-radius:8px;padding:10px 13px;font-size:13px;color:#7a5b1e;margin-bottom:16px}
+  footer{text-align:center;color:var(--sub);font-size:12px;margin-top:24px}
+  @media (max-width:760px){
+    .hwrap h1{font-size:22px}
+    .trip{padding:14px;gap:12px}
+    .trip .emoji{font-size:28px}
+    .trip .t{font-size:16px}
+    .trip .r{font-size:12.5px}
   }
 </style>
 </head>
 <body>
-
 <header>
   <div class="hwrap">
-    <div class="htop">
-      <span class="htag">亲子游 · 5人 · 3天2晚 · 舒适型</span>
-      <span class="hdate">2026.8.20（周四）夜 — 8.24（周一）上午 | 2大2小从赤壁来 · 你在深圳接待</span>
-    </div>
-    <h1>🚄 赤壁 → 广州（2天）→ 惠州（1天）</h1>
-    <div class="sub">去程坐 K237 玩满长隆7.5小时 · 返程从惠州站始发上车 · 全程自驾衔接，动线一条线</div>
-    <div class="htrain">
-      <div class="htcard">
-        <div class="emoji">🌙</div>
-        <div>
-          <div class="lbl">去程 · 卧铺过夜</div>
-          <div class="rt">
-            <span><span class="big">22:40</span> 赤壁</span>
-            <span class="nm">K237</span>
-            <span>广州北 <span class="big">09:20</span></span>
-          </div>
-        </div>
-      </div>
-      <div class="htcard">
-        <div class="emoji">🚂</div>
-        <div>
-          <div class="lbl">返程 · 惠州站始发</div>
-          <div class="rt">
-            <span>惠州站 <span class="big">20:06</span></span>
-            <span class="nm">K437</span>
-            <span><span class="big">09:38</span> 赤壁</span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <h1>🗺️ 旅行档案</h1>
+    <div class="sub">我们家的行程卡 · 每条行程一张卡片，点开看完整计划</div>
   </div>
 </header>
-
 <div class="wrap">
+  <div class="tip">💡 手机上看：Safari 打开本页 → 分享 → 「添加到主屏幕」，以后点图标直接进档案库；每次新增行程，刷新即可看到。</div>
 
-  <!-- 总览 -->
-  <div class="overview" id="ov">
-    <div class="ovd"><div class="d">8/20 周四夜</div><div class="t">家人 K237 上车</div><div class="s">卧铺过夜</div><span class="stay">你在广州北住一晚</span></div>
-    <div class="ovd"><div class="d">8/21 周五</div><div class="t">长隆玩满7.5h</div><div class="s">09:20接站→11:00进园</div><span class="stay">住广州天河</span></div>
-    <div class="ovd"><div class="d">8/22 周六</div><div class="t">早茶+市区+夜游</div><div class="s">泮溪早茶→陈家祠→晴☀️/雨🌧️双线</div><span class="stay">住广州天河</span></div>
-    <div class="ovd"><div class="d">8/23 周日</div><div class="t">巽寮湾玩海</div><div class="s">沙滩玩水→惠州站返程</div><span class="stay">卧铺过夜</span></div>
-    <div class="ovd"><div class="d">8/24 周一</div><div class="t">09:38 到赤壁</div><div class="s">打车回家补觉</div><span class="stay">—</span></div>
-  </div>
+  <a class="trip" href="guangzhou.html">
+    <span class="emoji">🚄</span>
+    <span class="info">
+      <span class="t">赤壁 → 广州 → 惠州 · 3天2晚亲子游</span>
+      <span class="d">2026.8.20（夜）— 8.24（上午）· 5人 · 卧铺往返 · 自驾衔接</span>
+      <span class="r">长隆野生动物世界 · 泮溪早茶 · 陈家祠 · 广州塔夜景+珠江夜游（晴/雨双方案）· 巽寮湾玩海</span>
+    </span>
+    <span class="go">打开 ›</span>
+  </a>
 
-  <!-- 两列主体 -->
-  <div class="main">
-
-    <!-- 左列：行程 -->
-    <div class="col-main">
-
-      <div class="card" id="d1">
-        <div class="card-h"><span class="bar"></span><span class="ico">🐼</span>D1 · 8/21（周五）广州 · 长隆一整天</div>
-        <div class="card-b">
-          <div class="tl">
-            <div class="item hot"><div class="tm">09:00</div><div class="tx">你在广州北附近酒店退房，出站口接人</div><div class="nt">前一晚已住花都，睡到自然醒，不用凌晨赶路</div></div>
-            <div class="item hot"><div class="tm">09:20</div><div class="tx">接到家人（K237 到达广州北站）</div><div class="nt">帮忙拿行李，直接上车出发</div></div>
-            <div class="item"><div class="tm">09:35</div><div class="tx">自驾去长隆（约70km，1-1.5小时）</div></div>
-            <div class="item hot"><div class="tm">11:00-18:30</div><div class="tx">长隆野生动物世界 · 玩满7.5小时</div><div class="nt">门票 成人¥300-350 / 儿童¥210-245，网上提前1天订<br><b>建议南门进</b>：熊猫→考拉→白虎跳水→小火车（坐右手边）→缆车→4D影院→16:30快乐加马大巡游</div></div>
-            <div class="item"><div class="tm">12:30</div><div class="tx">园内午餐：熊猫亲子餐厅</div><div class="nt">人均¥68-98；园区禁带普通食品（仅婴儿食品）</div></div>
-            <div class="item"><div class="tm">18:30</div><div class="tx">离园 → 回市区酒店（约40分钟）</div></div>
-            <div class="item"><div class="tm">20:00</div><div class="tx">入住天河酒店，晚餐后早点休息</div><div class="nt">火车夜+长隆一整天，孩子该累了；广州塔夜景改D2<br>晚餐就酒店楼下解决：天河城/正佳/体育西横街，步行即到</div></div>
-          </div>
-          <div class="callout">☔ 雨天预案：长隆熊猫馆/4D影院/科普馆均在室内，小雨照玩；如遇暴雨预警，可与 D2 雨天方案对调行程。</div>
-        </div>
-      </div>
-
-      <div class="card" id="d2">
-        <div class="card-h"><span class="bar"></span><span class="ico">🥟</span>D2 · 8/22（周六）广州 · 文化日<span style="margin-left:auto;font-size:11.5px;font-weight:700;color:var(--sun);background:#fdeccd;border-radius:999px;padding:2px 12px">☀️/🌧️ 双方案</span></div>
-        <div class="card-b">
-          <div class="callout" style="margin:0 0 14px">出发前一晚看 8/22 天气预报切换方案：<b>晴天走珠江新城线，雨天走室内线</b>；上午老城段两案通用。</div>
-          <div class="tabbox">
-            <input type="radio" name="d2w" id="d2-sun" checked>
-            <input type="radio" name="d2w" id="d2-rain">
-            <div class="tabbar">
-              <label for="d2-sun">☀️ 晴天方案 · 珠江新城线</label>
-              <label for="d2-rain">🌧️ 雨天方案 · 室内线</label>
-            </div>
-            <div class="pane pane-sun">
-              <div class="tl">
-                <div class="item hot"><div class="tm">07:45</div><div class="tx">到泮溪酒家取号（周六早茶要早到）</div><div class="nt">08:00-09:30 慢慢"叹"：虾饺/肠粉/凤爪/艇仔粥，人均¥70-100</div></div>
-                <div class="item"><div class="tm">09:30</div><div class="tx">荔枝湾涌 + 荔湾湖公园（免费）</div><div class="nt">就在泮溪门口，树荫廊桥，散步消食</div></div>
-                <div class="item"><div class="tm">10:30</div><div class="tx">陈家祠（¥10）1小时</div><div class="nt">岭南建筑瑰宝，木雕/砖雕/灰塑三绝</div></div>
-                <div class="item"><div class="tm">12:00</div><div class="tx">永庆坊午餐 + 粤剧艺术博物馆（免费）</div><div class="nt">骑楼老街+室内博物馆，正午避暑；有余力顺路沙面拍30分钟（约1km）</div></div>
-                <div class="item"><div class="tm">14:30</div><div class="tx">回天河酒店休整（避开11-15暴晒）</div><div class="nt">抢到省博票的：改去广东省博物馆（免费·恐龙+海洋馆，就在花城广场）</div></div>
-                <div class="item"><div class="tm">17:30</div><div class="tx">出发去广州塔（地铁3号线仅2站）</div><div class="nt"><b>🚗 首选开车</b>：导航搜"广州塔停车场"，约¥10/小时，<b>18:00 前到才有位</b>（散场直接上车回酒店）<br><b>🚇 不想开车</b>：体育西路→珠江新城→广州塔，地铁3号线仅2站约7分钟，出站步行5分钟到塔和码头；散场打车回酒店约¥25-30<br>若想先逛花城广场：16:30 停花城汇地下 → APM 坐 2 站直达广州塔</div></div>
-                <div class="item"><div class="tm">18:00</div><div class="tx">塔区晚餐</div><div class="nt">塔裙楼简餐/茶餐厅，或先在花城汇吃完再开车过来（5分钟车程）</div></div>
-                <div class="item hot"><div class="tm">19:30</div><div class="tx">海心桥拍塔夜景（南岸入口就在塔西侧，免费·免预约）</div><div class="nt">19:30 前后塔身灯光全亮，桥上是最佳机位；塔底仰拍小蛮腰打卡</div></div>
-                <div class="item"><div class="tm">20:00</div><div class="tx">登塔看两岸夜景（¥150/人可选）</div><div class="nt">433m 白云星空观光层，俯瞰珠江两岸灯河；不登塔就在塔下看灯光也行</div></div>
-                <div class="item hot"><div class="tm">21:00</div><div class="tx">广州塔码头 · 珠江夜游（约¥100/人）</div><div class="nt">码头就在塔脚东侧，步行5分钟；提前网上实名订 21:00 前后班次，全程约1小时，船上回看小蛮腰灯光最出片</div></div>
-                <div class="item"><div class="tm">22:10</div><div class="tx">走回停车场取车，15分钟回天河酒店</div><div class="nt">散场直接上车即走；明天 7:00 出发，23:00 前睡下</div></div>
-              </div>
-            </div>
-            <div class="pane pane-rain">
-              <div class="tl">
-                <div class="item hot"><div class="tm">07:45</div><div class="tx">泮溪酒家早茶（室内，雨天更该慢慢叹）</div><div class="nt">08:00-09:30，虾饺/肠粉/凤爪/艇仔粥，人均¥70-100</div></div>
-                <div class="item"><div class="tm">09:45</div><div class="tx">陈家祠（¥10）</div><div class="nt">雨廊+展厅可避雨，1小时左右</div></div>
-                <div class="item"><div class="tm">11:00</div><div class="tx">永庆坊午餐</div><div class="nt">骑楼长廊遮雨，老字号肠粉/云吞面解决</div></div>
-                <div class="item"><div class="tm">12:30</div><div class="tx">粤剧艺术博物馆（免费·室内）</div><div class="nt">水榭戏台听雨，正午避雨首选</div></div>
-                <div class="item hot"><div class="tm">14:00</div><div class="tx">方案A：广东省博物馆（免费）</div><div class="nt">恐龙化石+海洋馆+潮州木雕，逛到17:00；<b>需8/16起在公众号抢票</b><br>方案B（没抢到票）：正佳广场——极地海洋世界（约¥150-200/人）+ 自然科学博物馆（约¥80-100/人），全室内逛到傍晚</div></div>
-                <div class="item"><div class="tm">17:00</div><div class="tx">广州图书馆亲子绘本馆（免费）或商场闲逛</div></div>
-                <div class="item"><div class="tm">18:30</div><div class="tx">天河商圈晚餐</div><div class="nt">雨天不进江边，商场里解决</div></div>
-                <div class="item hot"><div class="tm">20:00</div><div class="tx">北京路 + 大佛寺夜景（免费）</div><div class="nt">骑楼避雨，千年古道遗址+大佛寺亮灯，雨夜更震撼；或珠江夜游改坐室内舱</div></div>
-                <div class="item"><div class="tm">21:15</div><div class="tx">回酒店休息</div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card" id="d3">
-        <div class="card-h"><span class="bar"></span><span class="ico">🏖️</span>D3 · 8/23（周日）惠州 · 巽寮湾玩海 + 返程</div>
-        <div class="card-b">
-          <div class="tl">
-            <div class="item hot"><div class="tm">07:00</div><div class="tx">退房出发去巽寮湾（约212km / 2.6h）</div><div class="nt"><b>⚠️ 8月周日必堵，7点前必须出发！</b></div></div>
-            <div class="item hot"><div class="tm">10:00-14:45</div><div class="tx">巽寮湾沙滩玩水（免费、无需预约）</div><div class="nt">游泳/堆沙堡/海鲜午餐（人均¥80-120）/水上项目（记得讲价）<br>只在救生员划定区域游泳，盯紧孩子</div></div>
-            <div class="item"><div class="tm">14:45</div><div class="tx">撤出海湾 → 惠州站（约83.5km / 1-1.5h）</div><div class="nt"><b>⚠️ 出湾也堵，留足余量</b></div></div>
-            <div class="item"><div class="tm">16:15</div><div class="tx">惠州站附近晚餐 → 19:00 进站候车</div><div class="nt">玩海一身沙：可在惠州站旁开钟点房（约¥60-100/4h）冲凉换衣再进站</div></div>
-            <div class="item hot"><div class="tm">20:06</div><div class="tx">K437 发车，卧铺睡整觉</div><div class="nt">零食+动画片备足，21:00熄灯前洗漱</div></div>
-            <div class="item"><div class="tm">8/24 09:38</div><div class="tx">到赤壁，打车回家补觉 ✅</div><div class="nt">上午到家，不用凌晨赶路</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 右列：信息栏 -->
-    <aside class="side" id="info">
-
-      <div class="card">
-        <div class="card-h"><span class="ico">🎫</span>车票详情</div>
-        <div class="card-b">
-          <div class="ticket">
-            <div class="ttop"><span>去程 · 卧铺过夜</span><span class="open">今天 8/6 开抢</span></div>
-            <div class="tbody">
-              <div class="sta"><div class="t1">22:40</div><div class="t2">8/20 赤壁</div></div>
-              <div class="mid"><div class="no">K237</div><div class="line"></div><div class="via">太原→深圳东 · 约10.5h</div></div>
-              <div class="sta"><div class="t1">09:20</div><div class="t2">8/21 广州北</div></div>
-            </div>
-            <div class="tbot"><span>硬卧 <b>¥207</b> / 软卧 ¥380</span><span>4张连号下铺</span></div>
-          </div>
-          <div class="ticket">
-            <div class="ttop"><span>返程 · 惠州站始发</span><span class="open green">8/9 开抢</span></div>
-            <div class="tbody">
-              <div class="sta"><div class="t1">20:06</div><div class="t2">8/23 惠州站</div></div>
-              <div class="mid"><div class="no">K437</div><div class="line"></div><div class="via">惠州→武昌 · 约13.5h 空调快速</div></div>
-              <div class="sta"><div class="t1">09:38</div><div class="t2">8/24 赤壁</div></div>
-            </div>
-            <div class="tbot"><span>硬卧 <b>¥260.5</b> / 软卧 ¥458.5</span><span>始发站票好买</span></div>
-          </div>
-          <div class="callout">📌 你的接站安排：8/20 下班后自驾去<b>广州北附近住一晚</b>（¥250-350），8/21 早 9:00 从容接站，不用凌晨起床。</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-h"><span class="ico">🗺️</span>备选景点 & 雨天 Plan B</div>
-        <div class="card-b">
-          <div class="spot"><span class="d">🏛️</span><div><b>广东省博物馆</b> · 免费 · 珠江新城<span class="s">恐龙化石+海洋馆+潮州木雕；提前7天公众号抢票，周末票难抢</span></div></div>
-          <div class="spot"><span class="d">🌉</span><div><b>海心桥</b> · 免费免预约<span class="s">花城广场步行过江，拍广州塔灯光最佳机位</span></div></div>
-          <div class="spot"><span class="d">🏙️</span><div><b>广州塔登塔</b> · ¥150/人<span class="s">433m白云星空观光层，儿童1.2m以下免票；晚上登塔看两岸灯河，19:30后塔身全亮</span></div></div>
-          <div class="spot"><span class="d">🚗</span><div><b>广州塔停车攻略</b><span class="s">首选广州塔地下停车场（约¥10/小时，18:00前到才有位）；备选花城汇地下停车场（大，约¥8-10/小时）→ APM坐2站直达广州塔，散场再坐回取车</span></div></div>
-          <div class="spot"><span class="d">⛪</span><div><b>沙面</b> · 免费<span class="s">离永庆坊约1km，欧陆老建筑+林荫，拍照30-45分钟</span></div></div>
-          <div class="spot"><span class="d">🏞️</span><div><b>越秀公园+镇海楼</b> · ¥10<span class="s">五羊石像，广州最经典地标；适合下次来玩半天</span></div></div>
-          <div class="spot"><span class="d">🏛️</span><div><b>南越王博物院（王墓展区）</b> · ¥10<span class="s">亲子"下墓"探秘，雨天室内，越秀片区</span></div></div>
-          <div class="spot"><span class="d">🌃</span><div><b>北京路+大佛寺</b> · 免费<span class="s">千年古道遗址；大佛寺亮灯震撼，骑楼可避雨</span></div></div>
-          <div class="spot"><span class="d">🛍️</span><div><b>天河城商圈</b> · 体育西地铁站上盖<span class="s">天河城/正佳广场/天环广场/时尚天河连成一片，酒店步行可达；孩子爱：正佳海洋馆、时尚天河"夜上海"街区、广州购书中心绘本区</span></div></div>
-          <div class="spot"><span class="d">☔</span><div><b>雨天专属 · 正佳广场</b><span class="s">极地海洋世界约¥150-200/人 + 自然科学博物馆约¥80-100/人，全室内；广州图书馆免费绘本馆兜底</span></div></div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-h"><span class="ico">🏨</span>住宿安排（3晚）</div>
-        <div class="card-b">
-          <div class="spot"><span class="d">1️⃣</span><div><b>8/20 广州北站附近 · 你 1 晚</b><span class="s">花都·新华街：全季/维也纳/城市便捷，¥250-350；<b>要免费停车 + 可延退房</b>，9:00 前退房从容接站</span></div></div>
-          <div class="spot"><span class="d">2️⃣</span><div><b>8/21-22 天河·珠江新城/体育西 · 2间×2晚</b><span class="s">3号线沿线（体育西路—珠江新城）：全季/亚朵/维也纳国际，约¥300-550/间/晚；家人订 1 间<b>亲子房</b>（4人睡）+ 你 1 间大床房；<b>必选免费停车或≤¥50/晚</b>（市中心很多酒店停车¥10-15/小时）<br>选这里：D2 夜游散场 15 分钟回家；D3 早 7 点出门，华南快速/广惠高速入口近</span></div></div>
-          <div class="spot"><span class="d">3️⃣</span><div><b>8/23 无住宿</b><span class="s">玩海完直接惠州站上 K437 卧铺；可选惠州站旁钟点房（约¥60-100/4h）冲凉换衣再进站</span></div></div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-h"><span class="ico">💰</span>预算（5人）</div>
-        <div class="card-b">
-          <table>
-            <tr><th>项目</th><th>费用</th><th>说明</th></tr>
-            <tr><td>往返卧铺×4</td><td><b>¥1,870</b></td><td>K237 ¥207 + K437 ¥260.5</td></tr>
-            <tr><td>住宿</td><td><b>¥2,250-2,750</b></td><td>天河2间×2晚(¥300-550/间) + 广州北1晚；亲子房另加¥100-200</td></tr>
-            <tr><td>长隆门票</td><td><b>¥1,050-1,230</b></td><td>成人×2 + 儿童×2</td></tr>
-            <tr><td>市区门票</td><td>¥200-400</td><td>登塔/夜游另加¥800-1,000；雨天走正佳另加约¥500-600</td></tr>
-            <tr><td>餐饮3天</td><td>¥2,200-2,600</td><td>含早茶</td></tr>
-            <tr><td>自驾</td><td>¥800-1,000</td><td>油费/高速/停车</td></tr>
-            <tr><td>杂项</td><td>¥200-400</td><td>泳具/防晒/水上项目</td></tr>
-            <tr class="total"><td>合计</td><td>¥8,600-10,600</td><td>舒适型 ✅</td></tr>
-          </table>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-h"><span class="ico">🎒</span>行前清单</div>
-        <div class="card-b">
-          <div class="grp">🪪 证件 & 抢票</div>
-          <div class="chk"><span class="b"></span>大人身份证×3、小孩身份证/户口本</div>
-          <div class="chk"><span class="b"></span>8/6 抢 K237（赤壁→广州北）</div>
-          <div class="chk"><span class="b"></span>8/9 抢 K437（惠州→赤壁）</div>
-          <div class="chk"><span class="b"></span>8/16 抢广东省博物馆（8/22，雨天方案用）</div>
-          <div class="grp">👕 衣物</div>
-          <div class="chk"><span class="b"></span>换洗4天 + 泳衣泳裤大毛巾</div>
-          <div class="chk"><span class="b"></span>防晒衣/遮阳帽/冰袖/沙滩拖鞋/薄外套</div>
-          <div class="chk"><span class="b"></span>折叠伞+轻便雨衣（8月雷阵雨，雨天方案用）</div>
-          <div class="grp">☀️ 防护</div>
-          <div class="chk"><span class="b"></span>防晒霜SPF50+、驱蚊液、小风扇、湿巾</div>
-          <div class="grp">💊 药品</div>
-          <div class="chk"><span class="b"></span>晕车药、创可贴、退烧药、肠胃药</div>
-          <div class="grp">📱 电子</div>
-          <div class="chk"><span class="b"></span>充电宝、下载好动画片/游戏</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-h"><span class="ico">⚠️</span>注意事项</div>
-        <div class="card-b">
-          <div class="warn red"><span class="d">🔴</span><div><b>抢票别错过</b>：去程 K237 今天(8/6)开抢；返程 K437 8/9 开抢，定闹钟！</div></div>
-          <div class="warn red"><span class="d">☔</span><div><b>晴雨双方案</b>：8/21 晚看 8/22 预报切换 D2 线路；长隆如遇暴雨预警，可与 D2 雨天方案对调</div></div>
-          <div class="warn"><span class="d">🎫</span><div><b>省博抢票</b>：8/16 起在"广东省博物馆"公众号抢 8/22 票（提前7天放票，雨天方案关键）</div></div>
-          <div class="warn red"><span class="d">🚗</span><div><b>巽寮湾周日堵</b>：早上7点前出发、下午14:45前撤，错峰避堵</div></div>
-          <div class="warn"><span class="d">📅</span><div><b>请假</b>：8/21-22 请假陪玩；8/23 送站后惠州→深圳约1.5h，晚10点前到家</div></div>
-          <div class="warn"><span class="d">🏨</span><div><b>住宿3晚</b>：广州北1晚(你) + 天河珠江新城/体育西 2间×2晚；<b>订带免费停车的</b>，自驾必查停车费</div></div>
-          <div class="warn"><span class="d">🎫</span><div><b>提前订</b>：长隆门票提前1天网购、珠江夜游提前订</div></div>
-          <div class="warn"><span class="d">🌊</span><div><b>玩水安全</b>：只在救生员区域游泳，盯紧孩子，注意潮汐</div></div>
-          <div class="warn"><span class="d">☀️</span><div><b>防暑</b>：11:00-15:00 暴晒时段安排室内/车上，多补水</div></div>
-          <div class="warn"><span class="d">🍜</span><div><b>饮食</b>：早茶以蒸点为主；海边大排档注意食材新鲜</div></div>
-        </div>
-      </div>
-    </aside>
-  </div>
-
-  <footer>🚄 祝旅途愉快！计划生成于 2026-08-06 · 车次/票价以 12306 实际为准</footer>
+  <!-- 以后新增行程：复制上面整条 <a class="trip"> 卡片，改 emoji/标题/日期/简介/href 即可 -->
+  <footer>新增行程卡片即可扩展 · 由 GitHub Pages 托管</footer>
 </div>
-
-<nav class="mnav">
-  <a href="#ov">📋 总览</a>
-  <a href="#d1">🐼 D1</a>
-  <a href="#d2">🥟 D2</a>
-  <a href="#d3">🏖️ D3</a>
-  <a href="#info">⚠️ 信息</a>
-</nav>
 </body>
 </html>
